@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loop WebRTC</title>
+
+</head>
+
+<body>
+    <style>
+        #outgoing {
+            width: 600px;
+            word-wrap: break-word;
+            white-space: normal;
+        }
+    </style>
+    <form id="login">
+        <textarea id="incoming"></textarea>
+        <button type="submit">submit</button>
+    </form>
+    <pre id="outgoing"></pre>
+    <hr />
+    <form id="message">
+        <textarea id="text"></textarea>
+        <button type="submit">send</button>
+    </form>
+    <div id="data"></div>
+
+    <script src="simplepeer.min.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
