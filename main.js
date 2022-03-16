@@ -1,4 +1,4 @@
-const p = new SimplePeer({
+const peer = new SimplePeer({
   initiator: location.hash === '#1',
   trickle: false,
   config: {
@@ -19,11 +19,6 @@ const p = new SimplePeer({
         username: '28224511:1379330808'
       },
       {
-        url: 'turn:turn.bistri.com:80',
-        credential: 'homeo',
-        username: 'homeo'
-      },
-      {
         url: 'turn:turn.anyfirewall.com:443?transport=tcp',
         credential: 'webrtc',
         username: 'webrtc'
@@ -32,39 +27,32 @@ const p = new SimplePeer({
   }
 })
 
-p.on('error', err => console.log('error', err))
-
-p.on('signal', data => {
-  console.log('SIGNAL', JSON.stringify(data))
-
-  document.querySelector('#outgoing').textContent = JSON.stringify(data)
+peer.on('signal', function (data) {
+  document.getElementById('my_token').textContent = JSON.stringify(data)
 })
 
-document.getElementById('login').addEventListener('submit', ev => {
-  ev.preventDefault()
-  var val = document.querySelector('#incoming').value
-  p.signal(JSON.parse(val))
+document.getElementById('login').addEventListener('submit', function (event) {
+  event.preventDefault()
+  var val = document.getElementById('peer_token').value
+  peer.signal(JSON.parse(val))
 })
 
-document.getElementById('message').addEventListener('submit', ev => {
-  ev.preventDefault()
+document.getElementById('message').addEventListener('submit', function (event) {
+  event.preventDefault()
   var val = document.getElementById('text').value
   var texts = document.getElementById('data')
   var node = document.createElement('div')
   node.innerText = val;
   node.style.color = 'blue'
   texts.appendChild(node)
-  p.send(val)
-
+  peer.send(val)
 })
 
-p.on('connect', () => {
-  console.log('CONNECT')
-  p.send('whatever' + Math.random())
+peer.on('connect', function () {
+  peer.send('Connected!!!')
 })
 
-p.on('data', data => {
-  console.log('data: ' + data)
+peer.on('data', function (data) {
   var texts = document.getElementById('data')
   var node = document.createElement('div')
   node.innerText = data;

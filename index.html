@@ -10,18 +10,12 @@
 </head>
 
 <body>
-    <style>
-        #outgoing {
-            width: 600px;
-            word-wrap: break-word;
-            white-space: normal;
-        }
-    </style>
     <form id="login">
-        <textarea id="incoming"></textarea>
+        <textarea readonly id="my_token"></textarea>
+        <textarea id="peer_token"></textarea>
         <button type="submit">submit</button>
     </form>
-    <span id="outgoing"></span>
+
     <hr />
     <form id="message">
         <textarea id="text"></textarea>
